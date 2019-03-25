@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Xunit_Exesize
 {
@@ -121,6 +122,25 @@ namespace Xunit_Exesize
         {
             Assert.Equal(4, Add(2, 2));
         }
+
+        #endregion
+
+        #region 输出想输出的信息
+        //https://xunit.github.io/docs/capturing-output.html
+        private readonly ITestOutputHelper Output;
+        public Test(ITestOutputHelper output)
+        {
+            this.Output = output;
+        }
+
+        [Trait("Group", "Output")]
+        [Fact]
+        public void TestOutput()
+        {
+            Output.WriteLine("测试输出");
+            Assert.True(true);
+        }
+
 
         #endregion
 
